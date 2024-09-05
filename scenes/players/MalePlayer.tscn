@@ -24,9 +24,11 @@ animations = [ {
 
 [node name="MalePlayer" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+speed = 200.0
 health = 10
-shoot_cooldown = 0.2
+shoot_cooldown = 0.1
 BulletType = ExtResource( 4 )
+bullet_speed = 600
 
 [node name="CollisionShape2D" parent="CollisionArea" index="0"]
 shape = SubResource( 1 )
@@ -34,4 +36,3 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 2 )
 animation = "default"
-frame = 0

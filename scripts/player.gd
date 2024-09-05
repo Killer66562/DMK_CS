@@ -2,8 +2,14 @@ class_name Player
 extends Character
 
 
+signal position_update
+
+
 export (PackedScene) var BulletType
+export var power := 0
 export var invinsible_sec := 5.0
+export var bullet_speed := 0
+export var bullet_velocity := Vector2(0, 0)
 
 
 onready var is_invincible = false
@@ -20,7 +26,7 @@ func _check() -> void:
 
 
 func _shoot_bullet():
-	can_shoot = false	
+	can_shoot = false
 
 
 func _ready() -> void:
@@ -30,6 +36,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	emit_signal("position_update")
 	if can_shoot:
 		_shoot_bullet()
 

@@ -7,10 +7,15 @@ var player_position := Vector2(0, 0)
 
 #Only use the types that extends Bullet
 #Overwrite it in _init() of the children classes
-var BulletTypes = [Bullet]
+export (Array, PackedScene) var BulletTypes
 
 
 onready var bullet_types_size = BulletTypes.size()
+onready var can_move = false
+
+
+func update_player_position(pos: Vector2):
+	player_position = pos
 
 
 func _ready() -> void:
@@ -23,19 +28,18 @@ func _check() -> void:
 		push_error("At least one type of Bullet is required")
 		get_tree().quit()
 	for BulletType in BulletTypes:
-		var instance = BulletType.new()
+		var instance = BulletType.instance()
 		if not instance as Bullet:
 			instance.queue_free()
 			push_error("Only Bullet type is allowed")
 			get_tree().quit()
 		instance.queue_free()
-	print("Test passed!")
 
 
 func _shoot_bullet() -> void:
 	var index = randi() % bullet_types_size
 	var BulletType = BulletTypes[index]
-	var bullet : Bullet = BulletType.new()
+	var bullet : Bullet = BulletType.instance()
 	bullet.position = position
 	bullet.velocity = Vector2(0, 1)
 	get_tree().root.add_child(bullet)

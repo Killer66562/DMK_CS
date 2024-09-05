@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/mob.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
 
-[node name="Mob" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-
-[node name="Area2D" parent="." index="0" groups=[
+[node name="Mob" groups=[
 "mob",
-]]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+] instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+BulletTypes = [ ExtResource( 3 ) ]
+
+[node name="MoveTimer" type="Timer" parent="." index="3"]

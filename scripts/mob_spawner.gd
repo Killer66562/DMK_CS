@@ -1,16 +1,17 @@
 class_name MobSpawner
-extends Node2D
+extends Area2D
 
-#Only classes that extended Mob are allowed
-#Overwrite it in _init() of the children classes
+
 export (Array, PackedScene) var MobTypes = []
 
 
 signal mob_spawn(mob)
 
 
-export var spawn_radius := 0.0
-export var spawn_cooldown := 0.3
+export var health := 100
+export var spawn_radius := 200
+export var spawn_cooldown := 1.0
+export var max_mob_spawn_per_time := 5
 
 
 onready var stopped := false
@@ -31,23 +32,22 @@ func _check() -> void:
 			get_tree().quit()
 			return
 		instance.queue_free()
-	print("Test passed!")
 
 
 func _spawn_mob() -> void:
-	var index = randi() % mob_types_size
-	var MobType = MobTypes[index]
-	var mob = MobType.instance()
-	var spawn_pos = position + Vector2(
-		rand_range(-spawn_radius, spawn_radius), 
-		rand_range(-spawn_radius, spawn_radius)
-	)
-	spawn_pos.x = clamp(spawn_pos.x, 0, 400)
-	spawn_pos.y = clamp(spawn_pos.y, 0, 800)
-	mob.position = spawn_pos
-	mob.set_as_toplevel(true)
-	mob_spawned += 1
-	emit_signal("mob_spawn", mob)
+	for i in range(randi() % max_mob_spawn_per_time + 1):
+		var index = randi() % mob_types_size
+		var MobType = MobTypes[index]
+		var mob = MobType.instance()
+		var spawn_pos = position + Vector2(
+			rand_range(-spawn_radius, spawn_radius), 
+			rand_range(-spawn_radius, spawn_radius)
+		)
+		print(spawn_pos)
+		mob.position = spawn_pos
+		get_tree().root.add_child(mob)
+		mob_spawned += 1
+		emit_signal("mob_spawn", mob)
 
 
 func _ready() -> void:
@@ -66,5 +66,9 @@ func _on_Timer_timeout() -> void:
 		_spawn_mob()
 		if mob_spawned >= 5:
 			stopped = true
-	else:
-		$Timer.stop()
+			$Timer.stop()
+
+
+func _on_MobSpawner_area_entered(area):
+	if area.is_in_group("player_bullet"):
+		health -= area.damage
