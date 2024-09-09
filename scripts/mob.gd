@@ -4,6 +4,8 @@ extends Character
 
 #I need a method to get the player from its parents
 var player_position := Vector2(0, 0)
+export var move_cooldown := 5.0
+export var move_to_next_pos_in_sec := 1.0
 
 #Only use the types that extends Bullet
 #Overwrite it in _init() of the children classes
@@ -22,7 +24,10 @@ func _ready() -> void:
 	_check()
 	randomize()
 	$ShootTimer.wait_time = shoot_cooldown
+	$MoveTimer.wait_time = move_cooldown
+	$MoveStopTimer.wait_time = move_to_next_pos_in_sec
 	$ShootTimer.start()
+	$MoveTimer.start()
 
 #Check all pre-requests in this function
 func _check() -> void:

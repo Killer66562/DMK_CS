@@ -41,3 +41,12 @@ func _process(delta: float) -> void:
 	position.x > disappear_xy_max.x or \
 	position.y > disappear_xy_max.y:
 		queue_free()
+
+
+func _on_XBullet_area_entered(area):
+	if is_in_group("mob_bullet"):
+		if area.is_in_group("player_area"):
+			queue_free()
+	elif is_in_group("player_bullet"):
+		if area.is_in_group("mob_area") or area.is_in_group("mob_spwaner"):
+			queue_free()

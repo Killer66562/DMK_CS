@@ -34,3 +34,7 @@ func _load_next_wave() -> void:
 
 func _on_FirstWaveLoadTimer_timeout():
 	_load_next_wave()
+
+
+func _on_MalePlayer_position_update():
+	get_tree().call_group("mob", "update_player_position", $MalePlayer.position)

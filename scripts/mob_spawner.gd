@@ -52,6 +52,8 @@ func _spawn_mob() -> void:
 func _ready() -> void:
 	randomize()
 	_check()
+	$ProgressBar.max_value = health
+	$ProgressBar.value = health
 	$Timer.wait_time = spawn_cooldown
 	$Timer.start()
 
@@ -71,3 +73,6 @@ func _on_Timer_timeout() -> void:
 func _on_MobSpawner_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		health -= area.damage
+		$ProgressBar.value = health
+		if health <= 0:
+			queue_free()

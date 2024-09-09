@@ -29,7 +29,6 @@ func _shoot_bullet() -> void:
 		bullet.rotate_acceleration = PI / 6
 		bullet.add_to_group("player_bullet")
 		get_tree().root.add_child(bullet)
-	
 
 
 func _process(delta: float) -> void:
@@ -70,13 +69,22 @@ func _on_ShootTimer_timeout():
 	can_shoot = true
 
 
+func _be_invincible():
+	is_invincible = true
+	$AnimatedSprite.animation = "invincible"
+	$InvincibleTimer.start()
+
+
 func _on_CollisionArea_area_entered(area):
-	if area.is_in_group("mob_bullet"):
+	if area.is_in_group("mob_bullet") and not is_invincible:
+		_be_invincible()
 		health -= area.damage
-	if area.is_in_group("mob"):
+	if area.is_in_group("mob_area") and not is_invincible:
+		_be_invincible()
 		health -= 1
 	if health <= 0:
 		emit_signal("die")
+		queue_free()
 		return
 	if area.is_in_group("item"):
 		if area.is_in_group("power"):

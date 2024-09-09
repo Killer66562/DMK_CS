@@ -9,3 +9,5 @@
 Waves = [ ExtResource( 2 ), ExtResource( 3 ) ]
 
 [node name="MalePlayer" parent="." index="1" instance=ExtResource( 4 )]
+power = 0
+[connection signal="position_update" from="MalePlayer" to="." method="_on_MalePlayer_position_update"]

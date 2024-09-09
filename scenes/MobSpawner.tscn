@@ -14,7 +14,9 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 12, 12 )
 
-[node name="MobSpawner" type="Area2D"]
+[node name="MobSpawner" type="Area2D" groups=[
+"mob_spawner",
+]]
 script = ExtResource( 1 )
 health = 0
 
@@ -25,5 +27,15 @@ frames = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_bottom = 10.0
+margin_left = -35.0
+margin_top = -27.0
+margin_right = 35.0
+margin_bottom = -13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="." to="." method="_on_MobSpawner_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

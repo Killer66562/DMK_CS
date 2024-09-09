@@ -10,4 +10,10 @@
 script = ExtResource( 2 )
 BulletTypes = [ ExtResource( 3 ) ]
 
+[node name="CollisionArea" parent="." index="0" groups=[
+"mob_area",
+]]
+
 [node name="MoveTimer" type="Timer" parent="." index="3"]
+
+[node name="MoveStopTimer" type="Timer" parent="." index="4"]

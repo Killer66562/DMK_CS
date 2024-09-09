@@ -6,11 +6,14 @@
 
 [node name="Wave2" instance=ExtResource( 1 )]
 
+[node name="EndTimer" parent="." index="0"]
+wait_time = 120.0
+
 [node name="MobSpawner" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( 487.332, 235.729 )
 MobTypes = [ ExtResource( 3 ) ]
-health = 10
-spawn_radius = 50
-spawn_cooldown = 2
-max_mob_spawn_per_time = 3
+health = 250
+spawn_radius = 150
+spawn_cooldown = 8
+max_mob_spawn_per_time = 4
 max_mob_can_spwan = 20

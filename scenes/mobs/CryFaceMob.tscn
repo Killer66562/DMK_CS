@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/angry-face.png" type="Texture" id=3]
 [ext_resource path="res://scenes/bullets/XBullet.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
@@ -18,12 +18,28 @@ animations = [ {
 
 [node name="CryFaceMob" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+health = 10
 shoot_cooldown = 0.5
 BulletTypes = [ ExtResource( 4 ) ]
 
 [node name="CollisionShape2D" parent="CollisionArea" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
-frames = SubResource( 1 )
+frames = SubResource( 2 )
+
+[node name="MoveTimer" parent="." index="3"]
+wait_time = 3.0
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="5"]
+margin_left = -30.0
+margin_top = -23.0
+margin_right = 30.0
+margin_bottom = -9.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="timeout" from="MoveStopTimer" to="." method="_on_MoveStopTimer_timeout"]
