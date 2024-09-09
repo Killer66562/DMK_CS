@@ -21,6 +21,8 @@ func update_player_position(pos: Vector2):
 func _ready() -> void:
 	_check()
 	randomize()
+	$ShootTimer.wait_time = shoot_cooldown
+	$ShootTimer.start()
 
 #Check all pre-requests in this function
 func _check() -> void:
@@ -34,25 +36,3 @@ func _check() -> void:
 			push_error("Only Bullet type is allowed")
 			get_tree().quit()
 		instance.queue_free()
-
-
-func _shoot_bullet() -> void:
-	var index = randi() % bullet_types_size
-	var BulletType = BulletTypes[index]
-	var bullet : Bullet = BulletType.instance()
-	bullet.position = position
-	bullet.velocity = Vector2(0, 1)
-	get_tree().root.add_child(bullet)
-	._shoot_bullet()
-
-
-func _process(_delta: float) -> void:
-	if can_shoot:
-		_shoot_bullet()
-
-
-func _on_Area2D_area_entered(area: Area2D) -> void:
-	if area.is_in_group("player_bullet_area"):
-		health -= area.damage
-		if health <= 0:
-			queue_free()

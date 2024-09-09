@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/CryFaceMob.gd" type="Script" id=2]
+[ext_resource path="res://assets/angry-face.png" type="Texture" id=3]
+[ext_resource path="res://scenes/bullets/XBullet.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="CryFaceMob" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+shoot_cooldown = 0.5
+BulletTypes = [ ExtResource( 4 ) ]
+
+[node name="CollisionShape2D" parent="CollisionArea" index="0"]
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" parent="." index="1"]
+frames = SubResource( 1 )
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

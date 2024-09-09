@@ -2,17 +2,22 @@ class_name MalePlayer
 extends Player
 
 
+onready var original_power := 0
+
+
 func _init() -> void:
 	health = 10
 	position = Vector2(600, 700)
 
 
 func _ready() -> void:
-	$AnimatedSprite.animation = "default"
+	is_invincible = true
+	$ShootTimer.wait_time = 0.1
+	$ShootTimer.start()
+	$InvincibleTimer.start()
 
 
 func _shoot_bullet() -> void:
-	._shoot_bullet()
 	for i in range(-power, power + 1):
 		var bullet: Bullet = BulletType.instance()
 		bullet.add_to_group("player_bullet")
@@ -22,11 +27,14 @@ func _shoot_bullet() -> void:
 		bullet.angular_velocity = PI / 24 * i
 		bullet.rotate_velocity = PI / 2
 		bullet.rotate_acceleration = PI / 6
+		bullet.add_to_group("player_bullet")
 		get_tree().root.add_child(bullet)
+	
 
 
 func _process(delta: float) -> void:
 	var velocity_next = Vector2(0, 0)
+	var current_speed = speed
 	
 	if Input.is_action_pressed("move_right"):
 		velocity_next.x += 1
@@ -36,15 +44,62 @@ func _process(delta: float) -> void:
 		velocity_next.y += 1
 	if Input.is_action_pressed("move_up"):
 		velocity_next.y -= 1
+	if Input.is_action_pressed("slow_down"):
+		current_speed *= 0.5
 	
 	velocity_next = velocity_next.normalized()
 	
-	position += velocity_next * speed * delta
+	position += velocity_next * current_speed * delta
 	emit_signal("position_update")
 	
-	if can_shoot:
+	if Input.is_action_pressed("shoot_bullet") and can_shoot:
+		can_shoot = false
+		$ShootTimer.start()
 		_shoot_bullet()
+	
+	if Input.is_action_pressed("use_skill") and can_use_skill:
+		emit_signal("use_skill")
 
 
 func _on_InvincibleTimer_timeout() -> void:
-	._on_InvincibleTimer_timeout()
+	is_invincible = false
+	$AnimatedSprite.animation = "default"
+
+
+func _on_ShootTimer_timeout():
+	can_shoot = true
+
+
+func _on_CollisionArea_area_entered(area):
+	if area.is_in_group("mob_bullet"):
+		health -= area.damage
+	if area.is_in_group("mob"):
+		health -= 1
+	if health <= 0:
+		emit_signal("die")
+		return
+	if area.is_in_group("item"):
+		if area.is_in_group("power"):
+			power += area.power
+			if $SkillTimer.time_left > 0:
+				original_power += area.power
+		if area.is_in_group("health"):
+			health += area.health
+		if area.is_in_group("score"):
+			pass
+
+
+func _on_SkillTimer_timeout():
+	power = original_power
+	$SkillCooldownTimer.start()
+
+
+func _on_SkillCooldownTimer_timeout():
+	can_use_skill = true
+
+
+func _on_MalePlayer_use_skill():
+	can_use_skill = false
+	original_power = power
+	power += 2
+	$SkillTimer.start()

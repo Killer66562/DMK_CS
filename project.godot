@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/character.gd"
 }, {
+"base": "Node",
+"class": "Game",
+"language": "GDScript",
+"path": "res://scripts/game.gd"
+}, {
 "base": "Item",
 "class": "HealingItem",
 "language": "GDScript",
@@ -59,14 +64,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/score_item.gd"
 }, {
+"base": "Node",
+"class": "Stage",
+"language": "GDScript",
+"path": "res://scripts/stage.gd"
+}, {
 "base": "Bullet",
 "class": "TestBullet",
 "language": "GDScript",
 "path": "res://scripts/test_bullet.gd"
+}, {
+"base": "Node",
+"class": "Wave",
+"language": "GDScript",
+"path": "res://scripts/wave.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Character": "",
+"Game": "",
 "HealingItem": "",
 "Item": "",
 "MalePlayer": "",
@@ -75,7 +91,9 @@ _global_script_class_icons={
 "Player": "",
 "PowerItem": "",
 "ScoreItem": "",
-"TestBullet": ""
+"Stage": "",
+"TestBullet": "",
+"Wave": ""
 }
 
 [application]
@@ -108,6 +126,21 @@ move_down={
 move_up={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
+ ]
+}
+shoot_bullet={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+ ]
+}
+use_skill={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+ ]
+}
+slow_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
  ]
 }
 

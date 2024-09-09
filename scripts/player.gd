@@ -3,6 +3,7 @@ extends Character
 
 
 signal position_update
+signal use_skill
 
 
 export (PackedScene) var BulletType
@@ -13,6 +14,7 @@ export var bullet_velocity := Vector2(0, 0)
 
 
 onready var is_invincible = false
+onready var can_use_skill = true
 
 
 func _check() -> void:
@@ -26,31 +28,12 @@ func _check() -> void:
 
 
 func _shoot_bullet():
-	can_shoot = false
+	pass
 
 
 func _ready() -> void:
-	_check()
-	$InvincibleTimer.wait_time = invinsible_sec
-	$AnimatedSprite.animation = "default"
+	pass
 
 
 func _process(delta: float) -> void:
-	emit_signal("position_update")
-	if can_shoot:
-		_shoot_bullet()
-
-
-func _on_CollisionArea_area_entered(area: Area2D) -> void:
-	if not is_invincible:
-		if area.is_in_group("mob_bullet"):
-			is_invincible = true
-			health -= 1
-			$AnimatedSprite.animation = "invincible"
-			$InvincibleTimer.start()
-			get_tree().call_group("player_bullet", "queue_free")
-
-
-func _on_InvincibleTimer_timeout() -> void:
-	is_invincible = false
-	$AnimatedSprite.animation = "default"
+	pass

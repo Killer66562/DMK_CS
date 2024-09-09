@@ -28,6 +28,7 @@ speed = 200.0
 health = 10
 shoot_cooldown = 0.1
 BulletType = ExtResource( 4 )
+power = 5
 bullet_speed = 600
 
 [node name="CollisionShape2D" parent="CollisionArea" index="0"]
@@ -35,4 +36,21 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 2 )
-animation = "default"
+
+[node name="ShootTimer" parent="." index="2"]
+wait_time = 0.1
+one_shot = true
+
+[node name="InvincibleTimer" parent="." index="3"]
+wait_time = 5.0
+
+[node name="SkillTimer" parent="." index="4"]
+wait_time = 10.0
+
+[node name="SkillCooldownTimer" parent="." index="5"]
+wait_time = 5.0
+[connection signal="use_skill" from="." to="." method="_on_MalePlayer_use_skill"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
+[connection signal="timeout" from="SkillTimer" to="." method="_on_SkillTimer_timeout"]
+[connection signal="timeout" from="SkillCooldownTimer" to="." method="_on_SkillCooldownTimer_timeout"]

@@ -29,4 +29,3 @@ frames = SubResource( 1 )
 playing = true
 
 [node name="ShootTimer" type="Timer" parent="."]
-[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

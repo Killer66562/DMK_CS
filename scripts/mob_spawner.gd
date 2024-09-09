@@ -9,9 +9,10 @@ signal mob_spawn(mob)
 
 
 export var health := 100
-export var spawn_radius := 200
-export var spawn_cooldown := 1.0
-export var max_mob_spawn_per_time := 5
+export var spawn_radius := 0
+export var spawn_cooldown := 0
+export var max_mob_spawn_per_time := 0
+export var max_mob_can_spwan := 0
 
 
 onready var stopped := false
@@ -37,13 +38,11 @@ func _check() -> void:
 func _spawn_mob() -> void:
 	for i in range(randi() % max_mob_spawn_per_time + 1):
 		var index = randi() % mob_types_size
-		var MobType = MobTypes[index]
-		var mob = MobType.instance()
+		var mob = MobTypes[index].instance()
 		var spawn_pos = position + Vector2(
 			rand_range(-spawn_radius, spawn_radius), 
 			rand_range(-spawn_radius, spawn_radius)
 		)
-		print(spawn_pos)
 		mob.position = spawn_pos
 		get_tree().root.add_child(mob)
 		mob_spawned += 1
@@ -64,7 +63,7 @@ func _process(delta: float) -> void:
 func _on_Timer_timeout() -> void:
 	if not stopped:
 		_spawn_mob()
-		if mob_spawned >= 5:
+		if mob_spawned >= max_mob_can_spwan:
 			stopped = true
 			$Timer.stop()
 

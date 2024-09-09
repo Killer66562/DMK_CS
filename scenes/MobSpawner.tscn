@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/mob_spawner.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Mob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/mob_spawner.png" type="Texture" id=3]
 
 [sub_resource type="SpriteFrames" id=1]
@@ -17,7 +16,7 @@ extents = Vector2( 12, 12 )
 
 [node name="MobSpawner" type="Area2D"]
 script = ExtResource( 1 )
-MobTypes = [ ExtResource( 2 ) ]
+health = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
