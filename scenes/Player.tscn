@@ -20,6 +20,10 @@ animations = [ {
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="CollisionArea" parent="." index="0" groups=[
+"player_area",
+]]
+
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 1 )
 animation = "invincible"

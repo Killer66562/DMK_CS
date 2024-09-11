@@ -12,6 +12,29 @@ func _shoot_bullet():
 	get_tree().root.add_child(bullet)
 
 
+func _drop_item():
+	if drop_item_types_size <= 0 or weights_size <= 0:
+		return null
+	if randf() >= item_drop_percentage:
+		return null
+	var total = 0
+	for num in weights:
+		total += num
+	var moded = randi() % total
+	var index = 0
+	var current_sum = 0
+	for num in weights:
+		current_sum += num
+		if moded < current_sum:
+			var item = DropItemTypes[index].instance()
+			item.velocity = Vector2(0, 1).normalized()
+			item.speed = 100
+			item.position = position
+			get_tree().root.call_deferred("add_child", item)
+			return
+		index += 1
+
+
 func _ready():
 	._ready()
 	$ProgressBar.max_value = health
@@ -48,6 +71,7 @@ func _on_CollisionArea_area_entered(area):
 		health -= area.damage
 		$ProgressBar.value = health
 		if health <= 0:
+			_drop_item()
 			queue_free()
 
 

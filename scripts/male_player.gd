@@ -2,6 +2,11 @@ class_name MalePlayer
 extends Player
 
 
+signal add_score(score)
+signal remove_score(score)
+signal power_update(power)
+
+
 onready var original_power := 0
 
 
@@ -82,6 +87,7 @@ func _on_CollisionArea_area_entered(area):
 	if area.is_in_group("mob_area") and not is_invincible:
 		_be_invincible()
 		health -= 1
+		emit_signal("remove_score", 2000)
 	if health <= 0:
 		emit_signal("die")
 		queue_free()
@@ -91,10 +97,11 @@ func _on_CollisionArea_area_entered(area):
 			power += area.power
 			if $SkillTimer.time_left > 0:
 				original_power += area.power
+			emit_signal("power_update", power)
 		if area.is_in_group("health"):
 			health += area.health
 		if area.is_in_group("score"):
-			pass
+			emit_signal("add_score", area.score)
 
 
 func _on_SkillTimer_timeout():

@@ -8,6 +8,7 @@ signal clear
 
 export (Array, PackedScene) var Waves
 export var stage_name := ""
+export var stage_introduction := ""
 
 
 onready var index := 0
@@ -34,7 +35,3 @@ func _load_next_wave() -> void:
 
 func _on_FirstWaveLoadTimer_timeout():
 	_load_next_wave()
-
-
-func _on_MalePlayer_position_update():
-	get_tree().call_group("mob", "update_player_position", $MalePlayer.position)

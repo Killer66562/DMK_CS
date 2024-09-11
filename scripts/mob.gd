@@ -6,13 +6,18 @@ extends Character
 var player_position := Vector2(0, 0)
 export var move_cooldown := 5.0
 export var move_to_next_pos_in_sec := 1.0
+export var item_drop_percentage := 0.0
 
 #Only use the types that extends Bullet
 #Overwrite it in _init() of the children classes
 export (Array, PackedScene) var BulletTypes
+export (Array, PackedScene) var DropItemTypes
+export (Array, int) var weights
 
 
 onready var bullet_types_size = BulletTypes.size()
+onready var drop_item_types_size = DropItemTypes.size()
+onready var weights_size = weights.size()
 onready var can_move = false
 
 
@@ -34,6 +39,9 @@ func _check() -> void:
 	if bullet_types_size <= 0:
 		push_error("At least one type of Bullet is required")
 		get_tree().quit()
+	if drop_item_types_size != weights_size:
+		push_error("The size of drop items needs to equal the size of weights")
+		get_tree().quit()
 	for BulletType in BulletTypes:
 		var instance = BulletType.instance()
 		if not instance as Bullet:
@@ -41,3 +49,9 @@ func _check() -> void:
 			push_error("Only Bullet type is allowed")
 			get_tree().quit()
 		instance.queue_free()
+	for DropItemType in DropItemTypes:
+		var instance = DropItemType.instance()
+		if not instance as Item:
+			instance.queue_free()
+			push_error("Only Item type is allowed")
+			get_tree().quit()

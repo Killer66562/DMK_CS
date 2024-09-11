@@ -2,4 +2,4 @@ class_name ScoreItem
 extends Item
 
 
-export var score := 2500
+export var score := 500

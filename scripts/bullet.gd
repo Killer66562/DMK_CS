@@ -48,5 +48,5 @@ func _on_XBullet_area_entered(area):
 		if area.is_in_group("player_area"):
 			queue_free()
 	elif is_in_group("player_bullet"):
-		if area.is_in_group("mob_area") or area.is_in_group("mob_spwaner"):
+		if area.is_in_group("mob_area") or area.is_in_group("mob_spawner"):
 			queue_free()
