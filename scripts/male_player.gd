@@ -94,9 +94,12 @@ func _on_CollisionArea_area_entered(area):
 		return
 	if area.is_in_group("item"):
 		if area.is_in_group("power"):
-			power += area.power
+			if power < max_power:
+				power += area.power
 			if $SkillTimer.time_left > 0:
 				original_power += area.power
+				if original_power >= max_power:
+					original_power = max_power
 			emit_signal("power_update", power)
 		if area.is_in_group("health"):
 			health += area.health

@@ -36,6 +36,7 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 2 )
+frame = 0
 
 [node name="ShootTimer" parent="." index="2"]
 wait_time = 0.1

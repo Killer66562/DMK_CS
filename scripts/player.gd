@@ -8,6 +8,7 @@ signal use_skill
 
 export (PackedScene) var BulletType
 export var power := 0
+export var max_power := 3
 export var invinsible_sec := 5.0
 export var bullet_speed := 0
 export var bullet_velocity := Vector2(0, 0)
