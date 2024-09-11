@@ -6,6 +6,8 @@ export (Array, PackedScene) var MobTypes = []
 
 
 signal mob_spawn(mob)
+signal mob_die(mob)
+signal destroyed(spawner)
 
 
 export var health := 100
@@ -13,9 +15,11 @@ export var spawn_radius := 0
 export var spawn_cooldown := 0
 export var max_mob_spawn_per_time := 0
 export var max_mob_can_spwan := 0
+export var score := 0
 
 
 onready var stopped := false
+onready var is_destroyed := false
 onready var mob_spawned := 0
 onready var mob_types_size = MobTypes.size()
 
@@ -35,16 +39,21 @@ func _check() -> void:
 		instance.queue_free()
 
 
+func _on_Mob_died(mob):
+	emit_signal("mob_die", mob)
+
+
 func _spawn_mob() -> void:
 	for i in range(randi() % max_mob_spawn_per_time + 1):
 		var index = randi() % mob_types_size
 		var mob = MobTypes[index].instance()
+		mob.connect("die", self, "_on_Mob_died")
 		var spawn_pos = position + Vector2(
 			rand_range(-spawn_radius, spawn_radius), 
 			rand_range(-spawn_radius, spawn_radius)
 		)
 		mob.position = spawn_pos
-		get_tree().root.add_child(mob)
+		get_tree().root.call_deferred("add_child", mob)
 		mob_spawned += 1
 		emit_signal("mob_spawn", mob)
 
@@ -73,6 +82,8 @@ func _on_Timer_timeout() -> void:
 func _on_MobSpawner_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		health -= area.damage
-		$ProgressBar.value = health
-		if health <= 0:
+		if health <= 0 and not is_destroyed:
+			is_destroyed = true
+			emit_signal("destroyed", self)
 			queue_free()
+		$ProgressBar.value = health

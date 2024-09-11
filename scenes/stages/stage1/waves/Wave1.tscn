@@ -1,37 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/Wave.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/MobSpawner.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/mobs/CryFaceMob.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/spawners/MobSpawner1.tscn" type="PackedScene" id=2]
 
 [node name="Wave1" instance=ExtResource( 1 )]
+Spawners = [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ]
+spawner_positions = [ Vector2( 500, 100 ), Vector2( 600, 200 ), Vector2( 700, 300 ) ]
 
 [node name="EndTimer" parent="." index="0"]
 wait_time = 60.0
-
-[node name="MobSpawner" parent="." index="1" instance=ExtResource( 3 )]
-position = Vector2( 592.101, 188.901 )
-MobTypes = [ ExtResource( 4 ) ]
-health = 100
-spawn_radius = 100
-spawn_cooldown = 10
-max_mob_spawn_per_time = 3
-max_mob_can_spwan = 10
-
-[node name="MobSpawner2" parent="." index="2" instance=ExtResource( 3 )]
-position = Vector2( 727.03, 148.422 )
-MobTypes = [ ExtResource( 4 ) ]
-health = 100
-spawn_radius = 100
-spawn_cooldown = 10
-max_mob_spawn_per_time = 3
-max_mob_can_spwan = 10
-
-[node name="MobSpawner3" parent="." index="3" instance=ExtResource( 3 )]
-position = Vector2( 473.045, 149.216 )
-MobTypes = [ ExtResource( 4 ) ]
-health = 100
-spawn_radius = 100
-spawn_cooldown = 10
-max_mob_spawn_per_time = 3
-max_mob_can_spwan = 10

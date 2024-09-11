@@ -70,6 +70,7 @@ func load_next_stage():
 	if stage_index < Stages.size():
 		current_stage = Stages[stage_index].instance()
 		current_stage.connect("clear", self, "load_next_stage")
+		current_stage.connect("spawner_destroyed", self, "add_score")
 		get_tree().root.call_deferred("add_child", current_stage)
 		_update_stage_text()
 		$StageLabel.show()

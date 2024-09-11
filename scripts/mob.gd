@@ -19,6 +19,7 @@ onready var bullet_types_size = BulletTypes.size()
 onready var drop_item_types_size = DropItemTypes.size()
 onready var weights_size = weights.size()
 onready var can_move = false
+onready var is_dead := false
 
 
 func update_player_position(pos: Vector2):

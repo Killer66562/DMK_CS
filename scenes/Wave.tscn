@@ -8,4 +8,8 @@ script = ExtResource( 1 )
 [node name="EndTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="EarlyEndTimer" type="Timer" parent="."]
+wait_time = 5.0
 [connection signal="timeout" from="EndTimer" to="." method="_on_EndTimer_timeout"]
+[connection signal="timeout" from="EarlyEndTimer" to="." method="_on_EarlyEndTimer_timeout"]

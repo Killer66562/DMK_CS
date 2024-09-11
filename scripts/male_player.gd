@@ -32,6 +32,7 @@ func _shoot_bullet() -> void:
 		bullet.angular_velocity = PI / 24 * i
 		bullet.rotate_velocity = PI / 2
 		bullet.rotate_acceleration = PI / 6
+		bullet.passthrough = true
 		bullet.add_to_group("player_bullet")
 		get_tree().root.add_child(bullet)
 

@@ -70,7 +70,9 @@ func _on_CollisionArea_area_entered(area):
 	if area.is_in_group("player_bullet"):
 		health -= area.damage
 		$ProgressBar.value = health
-		if health <= 0:
+		if health <= 0 and not is_dead:
+			is_dead = true
+			emit_signal("die", self)
 			_drop_item()
 			queue_free()
 

@@ -12,9 +12,17 @@ export var angular_acceleration := 0.0
 export var rotate_velocity := 0.0
 export var rotate_acceleration := 0.0
 export var stopped := false
+export var passthrough := false
 
 
 var velocity := Vector2(0, 0)
+
+
+onready var entities_entered := []
+
+
+func is_already_entered(entity) -> bool:
+	return entity in entities_entered
 
 
 func _ready() -> void:
@@ -43,10 +51,11 @@ func _process(delta: float) -> void:
 		queue_free()
 
 
-func _on_XBullet_area_entered(area):
+func _on_Bullet_area_entered(area: Area2D) -> void:
 	if is_in_group("mob_bullet"):
-		if area.is_in_group("player_area"):
+		if area.is_in_group("player_area") and not passthrough:
 			queue_free()
 	elif is_in_group("player_bullet"):
-		if area.is_in_group("mob_area") or area.is_in_group("mob_spawner"):
+		if (area.is_in_group("mob_area") or area.is_in_group("mob_spawner")) \
+		and not passthrough:
 			queue_free()

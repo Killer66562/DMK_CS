@@ -6,5 +6,5 @@
 
 [node name="Stage1" instance=ExtResource( 1 )]
 Waves = [ ExtResource( 2 ), ExtResource( 3 ) ]
-stage_name = "UMM"
-stage_introduction = "UMMMMMM"
+stage_name = "Test Stage"
+stage_introduction = "This is a test stage!"
