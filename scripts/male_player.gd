@@ -21,7 +21,7 @@ func _ready() -> void:
 	$ShootTimer.start()
 	$InvincibleTimer.start()
 	$AnimatedSprite2D.play()
-
+	$Health.value = health
 
 func _shoot_bullet() -> void:
 	for i in range(-power, power + 1):
@@ -86,9 +86,11 @@ func _on_CollisionArea_area_entered(area):
 	if area.is_in_group("mob_bullet") and not is_invincible:
 		_be_invincible()
 		health -= area.damage
+		$Health.value = health
 	if area.is_in_group("mob_area") and not is_invincible:
 		_be_invincible()
 		health -= 1
+		$Health.value = health
 		emit_signal("remove_score", 2000)
 	if health <= 0:
 		emit_signal("die")
@@ -104,7 +106,8 @@ func _on_CollisionArea_area_entered(area):
 					original_power = max_power
 			emit_signal("power_update", power)
 		if area.is_in_group("health"):
-			health += area.health
+			health = max(10, area.health)
+			$Health.value = health
 		if area.is_in_group("score"):
 			emit_signal("add_score", area.score)
 

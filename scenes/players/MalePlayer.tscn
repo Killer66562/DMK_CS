@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="2"]
 [ext_resource type="Script" path="res://scripts/male_player.gd" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/bullets/XBullet.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://yopa1tr6npo3" path="res://scenes/bullets/XBullet.tscn" id="4"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 4.0
@@ -62,6 +62,13 @@ wait_time = 10.0
 
 [node name="SkillCooldownTimer" parent="." index="5"]
 wait_time = 5.0
+
+[node name="Health" type="ProgressBar" parent="." index="8"]
+offset_left = -33.0
+offset_top = -34.0
+offset_right = 36.0
+offset_bottom = -7.0
+max_value = 10.0
 
 [connection signal="use_skill" from="." to="." method="_on_MalePlayer_use_skill"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

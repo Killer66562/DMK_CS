@@ -1,5 +1,13 @@
 res://default_env.tres
-res://scenes/items/ShieldItem.tscn
-res://scripts/shield_item.gd
 res://scenes/Game.tscn
 res://scenes/items/HealingItem.tscn
+res://scripts/male_player.gd
+res://scenes/MobBullet.gd
+res://scenes/mobs/CryFaceMob.tscn
+res://scenes/Bullet.tscn
+res://scenes/bullets/KnifeBullet.tscn
+res://scenes/bullets/XBullet.tscn
+res://scenes/bullets/SnowBullet.tscn
+res://scenes/bullets/RedBullet.tscn
+res://scenes/players/MalePlayer.tscn
+res://scripts/healing_item.gd
