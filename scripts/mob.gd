@@ -3,7 +3,6 @@ extends Character
 
 
 #I need a method to get the player from its parents
-var player_position := Vector2(0, 0)
 export var move_cooldown := 5.0
 export var move_to_next_pos_in_sec := 1.0
 export var item_drop_percentage := 0.0
@@ -20,6 +19,7 @@ onready var drop_item_types_size = DropItemTypes.size()
 onready var weights_size = weights.size()
 onready var can_move = false
 onready var is_dead := false
+onready var player_position := Vector2(position.x, position.y)
 
 
 func update_player_position(pos: Vector2):

@@ -2,12 +2,25 @@ extends Mob
 
 
 func _shoot_bullet():
-	var bullet = BulletTypes[randi() % bullet_types_size].instance()
-	bullet.velocity = (player_position - position).normalized()
-	bullet.speed = 200
-	bullet.rotate_velocity = PI
+	var moded = randi() % bullet_types_size
+	var bullet = BulletTypes[moded].instance()
 	bullet.position = position
-	bullet.damage = 1
+	if moded == 0:
+		bullet.velocity = (player_position - position).normalized()
+		bullet.speed = 200
+		bullet.rotate_velocity = PI
+		bullet.damage = 1
+	elif moded == 1:
+		bullet.velocity = Vector2(0, 1).normalized()
+		bullet.speed = 100
+		bullet.acceleration = 400
+		bullet.damage = 2
+		bullet.rotate(PI)
+	elif moded == 2:
+		bullet.velocity = Vector2(0, 1).normalized()
+		bullet.rotate_velocity = PI / 2
+		bullet.speed = 50
+		bullet.damage = 1
 	bullet.add_to_group("mob_bullet")
 	get_tree().root.add_child(bullet)
 

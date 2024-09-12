@@ -36,4 +36,8 @@ one_shot = true
 
 [node name="SkillCooldownTimer" type="Timer" parent="." index="5"]
 one_shot = true
+
+[node name="FreezeTimer" type="Timer" parent="." index="6"]
+
+[node name="DissyTimer" type="Timer" parent="." index="7"]
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]

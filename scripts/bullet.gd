@@ -13,6 +13,8 @@ export var rotate_velocity := 0.0
 export var rotate_acceleration := 0.0
 export var stopped := false
 export var passthrough := false
+export var freeze_secs := 0.0
+export var dizzy_secs := 0.0
 
 
 var velocity := Vector2(0, 0)
