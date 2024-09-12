@@ -2,7 +2,7 @@ class_name MobSpawner
 extends Area2D
 
 
-export (Array, PackedScene) var MobTypes = []
+@export var MobTypes : Array[PackedScene] = []
 
 
 signal mob_spawn(mob)
@@ -10,18 +10,18 @@ signal mob_die(mob)
 signal destroyed(spawner)
 
 
-export var health := 100
-export var spawn_radius := 0
-export var spawn_cooldown := 0
-export var max_mob_spawn_per_time := 0
-export var max_mob_can_spwan := 0
-export var score := 0
+@export var health := 100
+@export var spawn_radius := 0
+@export var spawn_cooldown := 0
+@export var max_mob_spawn_per_time := 0
+@export var max_mob_can_spwan := 0
+@export var score := 0
 
 
-onready var stopped := false
-onready var is_destroyed := false
-onready var mob_spawned := 0
-onready var mob_types_size = MobTypes.size()
+@onready var stopped := false
+@onready var is_destroyed := false
+@onready var mob_spawned := 0
+@onready var mob_types_size = MobTypes.size()
 
 
 #Check all pre-requests in this function
@@ -30,13 +30,13 @@ func _check() -> void:
 		push_error("At least one type of Mob is required")
 		get_tree().quit()
 	for MobType in MobTypes:
-		var instance = MobType.instance()
-		if not instance as Mob:
-			instance.queue_free()
+		var mob = MobType.instantiate()
+		if not is_instance_of(mob, Mob):
+			mob.queue_free()
 			push_error("Only Mob type is allowed")
 			get_tree().quit()
 			return
-		instance.queue_free()
+		mob.queue_free()
 
 
 func _on_Mob_died(mob):
@@ -46,11 +46,11 @@ func _on_Mob_died(mob):
 func _spawn_mob() -> void:
 	for i in range(randi() % max_mob_spawn_per_time + 1):
 		var index = randi() % mob_types_size
-		var mob = MobTypes[index].instance()
-		mob.connect("die", self, "_on_Mob_died")
+		var mob = MobTypes[index].instantiate()
+		mob.connect("die", Callable(self, "_on_Mob_died"))
 		var spawn_pos = position + Vector2(
-			rand_range(-spawn_radius, spawn_radius), 
-			rand_range(-spawn_radius, spawn_radius)
+			randf_range(-spawn_radius, spawn_radius), 
+			randf_range(-spawn_radius, spawn_radius)
 		)
 		mob.position = spawn_pos
 		get_tree().root.call_deferred("add_child", mob)

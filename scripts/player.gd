@@ -6,20 +6,20 @@ signal position_update
 signal use_skill
 
 
-export (PackedScene) var BulletType
-export var power := 0
-export var max_power := 3
-export var invinsible_sec := 5.0
-export var bullet_speed := 0
-export var bullet_velocity := Vector2(0, 0)
+@export var BulletType: PackedScene
+@export var power := 0
+@export var max_power := 3
+@export var invinsible_sec := 5.0
+@export var bullet_speed := 0
+@export var bullet_velocity := Vector2(0, 0)
 
 
-onready var is_invincible = false
-onready var can_use_skill = true
+@onready var is_invincible = false
+@onready var can_use_skill = true
 
 
 func _check() -> void:
-	var instance = BulletType.instance()
+	var instance = BulletType.instantiate()
 	if not instance as Bullet:
 		instance.queue_free()
 		push_error("Only Bullet type is allowed")

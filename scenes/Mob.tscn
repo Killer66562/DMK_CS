@@ -1,18 +1,46 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://bsh87xxqcjymw"]
 
-[ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/mob.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource type="PackedScene" path="res://scenes/Character.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/mob.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cvo413h0tl0a" path="res://scenes/Bullet.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="4_esov7"]
+[ext_resource type="Texture2D" uid="uid://b8vi4ytsu3by2" path="res://assets/full_mask_8x8.png" id="5_81crf"]
 
-[node name="Mob" groups=[
-"mob",
-] instance=ExtResource( 1 )]
-script = ExtResource( 2 )
-BulletTypes = [ ExtResource( 3 ) ]
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_esov7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_esov7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_81crf")
+}],
+"loop": true,
+"name": &"invincible",
+"speed": 5.0
+}]
 
-[node name="CollisionArea" parent="." index="0" groups=[
-"mob_area",
-]]
+[node name="Mob" groups=["mob"] instance=ExtResource("1")]
+script = ExtResource("2")
+move_cooldown = 5.0
+move_to_next_pos_in_sec = 1.0
+item_drop_percentage = 0.0
+BulletTypes = Array[PackedScene]([ExtResource("3")])
+DropItemTypes = Array[PackedScene]([])
+weights = Array[PackedScene]([])
+
+[node name="CollisionArea" parent="." index="0" groups=["mob_area"]]
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("1")
 
 [node name="MoveTimer" type="Timer" parent="." index="3"]
 

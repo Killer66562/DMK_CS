@@ -7,13 +7,13 @@ signal clear
 signal spawner_destroyed(score)
 
 
-export (Array, PackedScene) var Waves
-export var stage_name := ""
-export var stage_introduction := ""
+@export var Waves : Array[PackedScene] = []
+@export var stage_name := ""
+@export var stage_introduction := ""
 
 
-onready var index := 0
-onready var waves_size = Waves.size()
+@onready var index := 0
+@onready var waves_size = Waves.size()
 
 
 func _ready():
@@ -21,14 +21,14 @@ func _ready():
 	$FirstWaveLoadTimer.start()
 
 
-onready var current_wave : Wave = null
+@onready var current_wave : Wave = null
 
 
 func _load_next_wave() -> void:
 	if index < waves_size:
-		current_wave = Waves[index].instance()
-		current_wave.connect("end", self, "_load_next_wave")
-		current_wave.connect("spawner_destroyed", self, "_wave_spawner_destroyed")
+		current_wave = Waves[index].instantiate()
+		current_wave.connect("end", Callable(self, "_load_next_wave"))
+		current_wave.connect("spawner_destroyed", Callable(self, "_wave_spawner_destroyed"))
 		get_tree().root.add_child(current_wave)
 		index += 1
 	else:

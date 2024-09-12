@@ -5,20 +5,20 @@ extends Node2D
 signal end
 
 
-export (Array, PackedScene) var Stages
+@export var Stages : Array[PackedScene] = []
 
 
 #Timing
-onready var days := 0
-onready var hours := 0
-onready var minutes := 0
-onready var seconds := 0
+@onready var days := 0
+@onready var hours := 0
+@onready var minutes := 0
+@onready var seconds := 0
 
 
 #Game
-onready var score := 0 setget set_score, get_score
-onready var current_stage: Stage = null
-onready var stage_index = 0
+@onready var score := 0: get = get_score, set = set_score
+@onready var current_stage: Stage = null
+@onready var stage_index = 0
 
 
 func _update_stage_text():
@@ -68,9 +68,9 @@ func remove_score(value: int):
 
 func load_next_stage():
 	if stage_index < Stages.size():
-		current_stage = Stages[stage_index].instance()
-		current_stage.connect("clear", self, "load_next_stage")
-		current_stage.connect("spawner_destroyed", self, "add_score")
+		current_stage = Stages[stage_index].instantiate()
+		current_stage.connect("clear", Callable(self, "load_next_stage"))
+		current_stage.connect("spawner_destroyed", Callable(self, "add_score"))
 		get_tree().root.call_deferred("add_child", current_stage)
 		_update_stage_text()
 		$StageLabel.show()

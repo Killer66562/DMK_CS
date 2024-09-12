@@ -3,7 +3,7 @@ extends Mob
 
 func _shoot_bullet():
 	var moded = randi() % bullet_types_size
-	var bullet = BulletTypes[moded].instance()
+	var bullet = BulletTypes[moded].instantiate()
 	bullet.position = position
 	if moded == 0:
 		bullet.velocity = (player_position - position).normalized()
@@ -39,7 +39,7 @@ func _drop_item():
 	for num in weights:
 		current_sum += num
 		if moded < current_sum:
-			var item = DropItemTypes[index].instance()
+			var item = DropItemTypes[index].instantiate()
 			item.velocity = Vector2(0, 1).normalized()
 			item.speed = 100
 			item.position = position
@@ -49,7 +49,7 @@ func _drop_item():
 
 
 func _ready():
-	._ready()
+	super._ready()
 	$ProgressBar.max_value = health
 	$ProgressBar.value = health
 
@@ -65,8 +65,8 @@ func _on_ShootTimer_timeout():
 func _on_MoveTimer_timeout():
 	var next_position = \
 	Vector2(
-		player_position.x + rand_range(-80, 80), 
-		position.y + rand_range(-40, 40)
+		player_position.x + randf_range(-80, 80), 
+		position.y + randf_range(-40, 40)
 	)
 	var next_velocity = (next_position - position).normalized()
 	var next_speed = \

@@ -2,25 +2,25 @@ class_name Bullet
 extends Area2D
 
 
-export var disappear_xy_min := Vector2(300, -100)
-export var disappear_xy_max := Vector2(900, 900)
-export var damage := 1
-export var speed := 0.0
-export var acceleration := 0.0
-export var angular_velocity := 0.0
-export var angular_acceleration := 0.0
-export var rotate_velocity := 0.0
-export var rotate_acceleration := 0.0
-export var stopped := false
-export var passthrough := false
-export var freeze_secs := 0.0
-export var dizzy_secs := 0.0
+@export var disappear_xy_min := Vector2(300, -100)
+@export var disappear_xy_max := Vector2(900, 900)
+@export var damage := 1
+@export var speed := 0.0
+@export var acceleration := 0.0
+@export var angular_velocity := 0.0
+@export var angular_acceleration := 0.0
+@export var rotate_velocity := 0.0
+@export var rotate_acceleration := 0.0
+@export var stopped := false
+@export var passthrough := false
+@export var freeze_secs := 0.0
+@export var dizzy_secs := 0.0
 
 
 var velocity := Vector2(0, 0)
 
 
-onready var entities_entered := []
+@onready var entities_entered := []
 
 
 func is_already_entered(entity) -> bool:

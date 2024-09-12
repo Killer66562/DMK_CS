@@ -5,9 +5,9 @@ extends Node2D
 signal die
 
 
-export var speed := 0.0 setget set_speed, get_speed
-export var health := 0 setget set_health, get_health
-export var shoot_cooldown := 0.25
+@export var speed := 0.0: get = get_velocity, set = set_velocity
+@export var health := 0: get = get_health, set = set_health
+@export var shoot_cooldown := 0.25
 
 
 func set_health(value: int):
@@ -21,25 +21,25 @@ func get_health() -> int:
 	return health
 
 
-func set_speed(value: float):
+func set_velocity(value: float):
 	if value < 0:
 		speed = 0
 	else:
 		speed = value
 
 
-func get_speed() -> float:
+func get_velocity() -> float:
 	return speed
 
 
-onready var can_shoot := true
-onready var stopped := false
+@onready var can_shoot := true
+@onready var stopped := false
 
 
 var shoot_times := 0
 
 
-export var velocity := Vector2(0, 0)
+@export var velocity := Vector2(0, 0)
 
 
 func _shoot_bullet() -> void:

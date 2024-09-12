@@ -6,17 +6,17 @@ signal end
 signal spawner_destroyed(score)
 
 
-export var is_boss_wave := false
+@export var is_boss_wave := false
 
 
-export (Array, PackedScene) var Spawners
-export (Array, Vector2) var spawner_positions
+@export var Spawners : Array[PackedScene] = []
+@export var spawner_positions : Array[Vector2] = []
 
 
-onready var spawners_size = Spawners.size()
-onready var spawner_positions_size = spawner_positions.size()
-onready var spawners := []
-onready var spawned_mobs := []
+@onready var spawners_size = Spawners.size()
+@onready var spawner_positions_size = spawner_positions.size()
+@onready var spawners := []
+@onready var spawned_mobs := []
 
 
 func _check():
@@ -24,8 +24,8 @@ func _check():
 		push_error("The size of drop items needs to equal the size of weights")
 		get_tree().quit()
 	for spawner in Spawners:
-		var instance = spawner.instance()
-		if not instance as MobSpawner:
+		var instance = spawner.instantiate()
+		if not instance is MobSpawner:
 			push_error("The size of drop items needs to equal the size of weights")
 			get_tree().quit()
 
@@ -33,11 +33,11 @@ func _check():
 func _ready():
 	_check()
 	for i in range(spawners_size):
-		var spawner : MobSpawner = Spawners[i].instance()
+		var spawner : MobSpawner = Spawners[i].instantiate()
 		spawners.append(spawner)
 		spawner.position = spawner_positions[i]
-		spawner.connect("destroyed", self, "_on_MobSpawner_destroyed")
-		spawner.connect("mob_spawn", self, "_on_Mob_spawned")
+		spawner.connect("destroyed", Callable(self, "_on_MobSpawner_destroyed"))
+		spawner.connect("mob_spawn", Callable(self, "_on_Mob_spawned"))
 		get_tree().root.call_deferred("add_child", spawner)
 
 

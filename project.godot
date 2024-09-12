@@ -6,157 +6,62 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Area2D",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://scripts/bullet.gd"
-}, {
-"base": "Node2D",
-"class": "Character",
-"language": "GDScript",
-"path": "res://scripts/character.gd"
-}, {
-"base": "Node2D",
-"class": "Game",
-"language": "GDScript",
-"path": "res://scripts/game.gd"
-}, {
-"base": "Item",
-"class": "HealingItem",
-"language": "GDScript",
-"path": "res://scripts/healing_item.gd"
-}, {
-"base": "Area2D",
-"class": "Item",
-"language": "GDScript",
-"path": "res://scripts/item.gd"
-}, {
-"base": "Player",
-"class": "MalePlayer",
-"language": "GDScript",
-"path": "res://scripts/male_player.gd"
-}, {
-"base": "Character",
-"class": "Mob",
-"language": "GDScript",
-"path": "res://scripts/mob.gd"
-}, {
-"base": "Bullet",
-"class": "MobBullet",
-"language": "GDScript",
-"path": "res://scenes/MobBullet.gd"
-}, {
-"base": "Area2D",
-"class": "MobSpawner",
-"language": "GDScript",
-"path": "res://scripts/mob_spawner.gd"
-}, {
-"base": "Character",
-"class": "Player",
-"language": "GDScript",
-"path": "res://scripts/player.gd"
-}, {
-"base": "Bullet",
-"class": "PlayerBullet",
-"language": "GDScript",
-"path": "res://scenes/PlayerBullet.gd"
-}, {
-"base": "Item",
-"class": "PowerItem",
-"language": "GDScript",
-"path": "res://scripts/power_item.gd"
-}, {
-"base": "Item",
-"class": "ScoreItem",
-"language": "GDScript",
-"path": "res://scripts/score_item.gd"
-}, {
-"base": "Node",
-"class": "Stage",
-"language": "GDScript",
-"path": "res://scripts/stage.gd"
-}, {
-"base": "Bullet",
-"class": "TestBullet",
-"language": "GDScript",
-"path": "res://scripts/test_bullet.gd"
-}, {
-"base": "Node",
-"class": "Wave",
-"language": "GDScript",
-"path": "res://scripts/wave.gd"
-} ]
-_global_script_class_icons={
-"Bullet": "",
-"Character": "",
-"Game": "",
-"HealingItem": "",
-"Item": "",
-"MalePlayer": "",
-"Mob": "",
-"MobBullet": "",
-"MobSpawner": "",
-"Player": "",
-"PlayerBullet": "",
-"PowerItem": "",
-"ScoreItem": "",
-"Stage": "",
-"TestBullet": "",
-"Wave": ""
-}
+config_version=5
 
 [application]
 
 config/name="DMK_CS"
 run/main_scene="res://scenes/Game.tscn"
+config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1200
-window/size/height=800
+window/size/viewport_width=1200
+window/size/viewport_height=800
+
+[dotnet]
+
+project/assembly_name="DMK_CS"
 
 [input]
 
 move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194321,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 move_left={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194319,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777234,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194322,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 move_up={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777232,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194320,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 shoot_bullet={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 use_skill={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":90,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 slow_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"unicode":0,"echo":false,"script":null)
- ]
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194325,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
 }
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

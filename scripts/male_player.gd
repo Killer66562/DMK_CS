@@ -7,7 +7,7 @@ signal remove_score(score)
 signal power_update(power)
 
 
-onready var original_power := 0
+@onready var original_power := 0
 
 
 func _init() -> void:
@@ -20,11 +20,12 @@ func _ready() -> void:
 	$ShootTimer.wait_time = 0.1
 	$ShootTimer.start()
 	$InvincibleTimer.start()
+	$AnimatedSprite2D.play()
 
 
 func _shoot_bullet() -> void:
 	for i in range(-power, power + 1):
-		var bullet: Bullet = BulletType.instance()
+		var bullet: Bullet = BulletType.instantiate()
 		bullet.add_to_group("player_bullet")
 		bullet.position = position
 		bullet.speed = bullet_speed
@@ -68,7 +69,7 @@ func _process(delta: float) -> void:
 
 func _on_InvincibleTimer_timeout() -> void:
 	is_invincible = false
-	$AnimatedSprite.animation = "default"
+	$AnimatedSprite2D.animation = "default"
 
 
 func _on_ShootTimer_timeout():
@@ -77,7 +78,7 @@ func _on_ShootTimer_timeout():
 
 func _be_invincible():
 	is_invincible = true
-	$AnimatedSprite.animation = "invincible"
+	$AnimatedSprite2D.animation = "invincible"
 	$InvincibleTimer.start()
 
 

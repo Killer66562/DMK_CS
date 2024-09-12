@@ -1,0 +1,11 @@
+res://default_env.tres
+res://scenes/Game.tscn
+res://scenes/Wave.tscn
+res://scenes/stages/stage1/waves/Wave1.tscn
+res://scenes/spawners/MobSpawner1.tscn
+res://scenes/mobs/CryFaceMob.tscn
+res://scenes/Mob.tscn
+res://scenes/Bullet.tscn
+res://scenes/spawners/MobSpawner2.tscn
+res://scenes/players/MalePlayer.tscn
+res://scripts/male_player.gd
