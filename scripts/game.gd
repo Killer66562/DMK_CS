@@ -109,7 +109,7 @@ func _on_Timer_timeout():
 
 func _on_MalePlayer_position_update():
 	get_tree().call_group("mob", "update_player_position", $MalePlayer.position)
-
+	get_tree().call_group("dodge", "update_player_position", $MalePlayer.position)
 
 func _on_StageTextTimer_timeout():
 	$StageLabel.hide()

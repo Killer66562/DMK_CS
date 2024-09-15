@@ -6,13 +6,29 @@ signal die
 
 
 @export var speed := 0.0: get = get_velocity, set = set_velocity
-@export var health := 0: get = get_health, set = set_health
+@export var max_health := 0: get = get_max_health, set = set_max_health
 @export var shoot_cooldown := 0.25
+
+
+@onready var health := max_health: get = get_health, set = set_health
+
+
+func get_max_health():
+	return max_health
+
+
+func set_max_health(value: int):
+	if value < 0:
+		max_health = 0
+	else:
+		max_health = value
 
 
 func set_health(value: int):
 	if value < 0:
 		health = 0
+	elif value > max_health:
+		health = max_health
 	else:
 		health = value
 

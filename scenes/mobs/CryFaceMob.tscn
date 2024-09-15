@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn1p77tj8s2w2"]
+[gd_scene load_steps=13 format=3 uid="uid://bn1p77tj8s2w2"]
 
 [ext_resource type="PackedScene" uid="uid://bsh87xxqcjymw" path="res://scenes/Mob.tscn" id="1"]
 [ext_resource type="Script" path="res://scripts/CryFaceMob.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dn38ihnwl2jss" path="res://scenes/bullets/RedBullet.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/items/PowerItem.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/items/ScoreItem.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://cxskhnf2d2wit" path="res://scenes/bullets/BlueBullet.tscn" id="6_8bhks"]
 [ext_resource type="PackedScene" uid="uid://dp383b5gkqlf5" path="res://scenes/bullets/KnifeBullet.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://43eln1il0e36" path="res://scenes/bullets/SnowBullet.tscn" id="8"]
 [ext_resource type="PackedScene" uid="uid://jpl2uovkkjn0" path="res://scenes/items/HealingItem.tscn" id="8_cbh7q"]
@@ -27,10 +28,10 @@ animations = [{
 [node name="CryFaceMob" instance=ExtResource("1")]
 script = ExtResource("2")
 item_drop_percentage = 1.0
-BulletTypes = Array[PackedScene]([ExtResource("4"), ExtResource("7"), ExtResource("8")])
+BulletTypes = Array[PackedScene]([ExtResource("4"), ExtResource("7"), ExtResource("8"), ExtResource("6_8bhks")])
 DropItemTypes = Array[PackedScene]([ExtResource("5"), ExtResource("6"), ExtResource("8_cbh7q")])
 weights = Array[int]([1, 1, 100])
-health = 10
+max_health = 10
 shoot_cooldown = 0.5
 
 [node name="CollisionShape2D" parent="CollisionArea" index="0"]

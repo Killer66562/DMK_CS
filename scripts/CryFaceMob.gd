@@ -21,6 +21,11 @@ func _shoot_bullet():
 		bullet.rotate_velocity = PI / 2
 		bullet.speed = 50
 		bullet.damage = 1
+	elif moded == 3:
+		bullet.velocity = (player_position - position).normalized()
+		bullet.speed = 200
+		bullet.rotate_velocity = PI
+		bullet.damage = 1
 	bullet.add_to_group("mob_bullet")
 	get_tree().root.add_child(bullet)
 

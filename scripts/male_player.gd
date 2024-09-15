@@ -87,26 +87,30 @@ func _on_CollisionArea_area_entered(area):
 		_be_invincible()
 		health -= area.damage
 		$Health.value = health
+		$AudioStreamPlayer.play()
 	if area.is_in_group("mob_area") and not is_invincible:
 		_be_invincible()
 		health -= 1
 		$Health.value = health
-		emit_signal("remove_score", 2000)
+		remove_score.emit(2000)
+		$AudioStreamPlayer.play()
 	if health <= 0:
 		emit_signal("die")
 		queue_free()
 		return
 	if area.is_in_group("item"):
 		if area.is_in_group("power"):
-			if power < max_power:
-				power += area.power
+			var new_power = power + area.power
+			if new_power >= max_power:
+				new_power = max_power
+			power = new_power
 			if $SkillTimer.time_left > 0:
 				original_power += area.power
 				if original_power >= max_power:
 					original_power = max_power
 			emit_signal("power_update", power)
 		if area.is_in_group("health"):
-			health = max(10, area.health)
+			health = health + area.health
 			$Health.value = health
 		if area.is_in_group("score"):
 			emit_signal("add_score", area.score)
@@ -126,3 +130,9 @@ func _on_MalePlayer_use_skill():
 	original_power = power
 	power += 2
 	$SkillTimer.start()
+
+
+func _on_mlg_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("mob_bullet") and not area.sliced:
+		area.sliced = true
+		add_score.emit(100)

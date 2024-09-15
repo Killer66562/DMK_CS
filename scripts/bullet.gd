@@ -21,6 +21,7 @@ var velocity := Vector2(0, 0)
 
 
 @onready var entities_entered := []
+@onready var sliced := false
 
 
 func is_already_entered(entity) -> bool:

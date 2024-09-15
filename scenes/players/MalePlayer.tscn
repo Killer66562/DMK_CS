@@ -1,13 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://do2da534503sw"]
+[gd_scene load_steps=9 format=3 uid="uid://do2da534503sw"]
 
 [ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="2"]
 [ext_resource type="Script" path="res://scripts/male_player.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://yopa1tr6npo3" path="res://scenes/bullets/XBullet.tscn" id="4"]
+[ext_resource type="AudioStream" uid="uid://ch7qyyr4h5l88" path="res://assets/ouch.mp3" id="5_exu4w"]
 
 [sub_resource type="CapsuleShape2D" id="1"]
 radius = 4.0
 height = 8.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kyrl"]
+radius = 8.0
+height = 16.0
 
 [sub_resource type="SpriteFrames" id="2"]
 animations = [{
@@ -40,37 +45,46 @@ invinsible_sec = 5.0
 bullet_speed = 600
 bullet_velocity = Vector2(0, 0)
 speed = 200.0
-health = 10
+max_health = 10
 shoot_cooldown = 0.1
 
 [node name="CollisionShape2D" parent="CollisionArea" index="0"]
 shape = SubResource("1")
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="MLGArea" type="Area2D" parent="." index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MLGArea" index="0"]
+shape = SubResource("CapsuleShape2D_6kyrl")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("2")
 animation = &"invincible"
 
-[node name="ShootTimer" parent="." index="2"]
+[node name="ShootTimer" parent="." index="3"]
 wait_time = 0.1
 one_shot = true
 
-[node name="InvincibleTimer" parent="." index="3"]
+[node name="InvincibleTimer" parent="." index="4"]
 wait_time = 5.0
 
-[node name="SkillTimer" parent="." index="4"]
+[node name="SkillTimer" parent="." index="5"]
 wait_time = 10.0
 
-[node name="SkillCooldownTimer" parent="." index="5"]
+[node name="SkillCooldownTimer" parent="." index="6"]
 wait_time = 5.0
 
-[node name="Health" type="ProgressBar" parent="." index="8"]
+[node name="Health" type="ProgressBar" parent="." index="9"]
 offset_left = -33.0
 offset_top = -34.0
 offset_right = 36.0
 offset_bottom = -7.0
 max_value = 10.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("5_exu4w")
+
 [connection signal="use_skill" from="." to="." method="_on_MalePlayer_use_skill"]
+[connection signal="area_entered" from="MLGArea" to="." method="_on_mlg_area_area_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
 [connection signal="timeout" from="SkillTimer" to="." method="_on_SkillTimer_timeout"]
