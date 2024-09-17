@@ -1,0 +1,13 @@
+[
+	{
+		"text": "你好",
+		"image": "res://assets/angry-face.png"
+	}, 
+	{
+		"text": "？",
+		"image": "res://assets/male_player.png"
+	}, {
+		"text": "沒事，你走吧",
+		"image": "res://assets/angry-face.png"
+	}
+]

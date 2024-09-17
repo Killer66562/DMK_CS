@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://byskutjb7gu20"]
+
+[ext_resource type="Script" path="res://scripts/dialog_reader.gd" id="1_rq2hf"]
+[ext_resource type="PackedScene" uid="uid://4q5om6gulm4x" path="res://scenes/Dialog.tscn" id="2_v0u76"]
+
+[node name="DialogReader" type="Node"]
+script = ExtResource("1_rq2hf")
+DialogScene = ExtResource("2_v0u76")
+dialog_file = "res://dialogs/test.json"

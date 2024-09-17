@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://4q5om6gulm4x"]
+
+[ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="1_8nw2e"]
+[ext_resource type="Script" path="res://scripts/dialog.gd" id="1_fgi6u"]
+
+[node name="Dialog" type="Node2D"]
+script = ExtResource("1_fgi6u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(50, 50)
+scale = Vector2(6, 6)
+texture = ExtResource("1_8nw2e")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 100.0
+offset_right = 400.0
+offset_bottom = 100.0
+bbcode_enabled = true
+text = "Some text here.
+You will see it."
+
+[node name="ButtonPrev" type="Button" parent="."]
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 140.0
+text = "<<<"
+
+[node name="ButtonNext" type="Button" parent="."]
+offset_left = 220.0
+offset_top = 120.0
+offset_right = 320.0
+offset_bottom = 140.0
+text = ">>>"
+
+[connection signal="button_down" from="ButtonPrev" to="." method="_on_button_prev_button_down"]
+[connection signal="button_down" from="ButtonNext" to="." method="_on_button_next_button_down"]
