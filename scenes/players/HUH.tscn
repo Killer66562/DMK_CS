@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://cnalgrxgt226k"]
+
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_wfrop"]
+[ext_resource type="Script" path="res://scripts/huh.gd" id="2_bb1bl"]
+[ext_resource type="PackedScene" uid="uid://na4tac37xl8f" path="res://scenes/bullets/big_green_bullet.tscn" id="3_jquk7"]
+[ext_resource type="Texture2D" uid="uid://covwc51mjurh0" path="res://assets/huh.png" id="4_vlmni"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nbs0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vlmni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vlmni")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"invincible",
+"speed": 5.0
+}]
+
+[node name="HUH" instance=ExtResource("1_wfrop")]
+script = ExtResource("2_bb1bl")
+BulletType = ExtResource("3_jquk7")
+power = 0
+max_power = 10
+invinsible_sec = 3.0
+bullet_speed = 150
+bullet_velocity = Vector2(0, 0)
+speed = 140.0
+max_health = 10
+shoot_cooldown = 1.0
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_0nbs0")
+animation = &"invincible"
+
+[node name="SkillCooldownTimer" parent="." index="5"]
+wait_time = 5.0
+
+[node name="Health" type="ProgressBar" parent="." index="8"]
+offset_right = 40.0
+offset_bottom = 27.0
+
+[connection signal="use_skill" from="." to="." method="_on_use_skill"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="SkillCooldownTimer" to="." method="_on_skill_cooldown_timer_timeout"]
