@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://taay25h8ei25"]
+[gd_scene load_steps=3 format=3 uid="uid://taay25h8ei25"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/stages/stage1/Stage1.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://do2da534503sw" path="res://scenes/players/MalePlayer.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://cnalgrxgt226k" path="res://scenes/players/HUH.tscn" id="3_m82h3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -39,20 +37,8 @@ offset_top = 50.0
 offset_right = 100.0
 offset_bottom = 64.0
 
-[node name="HUH" parent="." instance=ExtResource("3_m82h3")]
-position = Vector2(600, 700)
-
-[node name="MalePlayer" parent="." instance=ExtResource("3")]
-visible = false
-position = Vector2(600, 700)
-power = 0
-
 [node name="StageTextTimer" type="Timer" parent="."]
 wait_time = 3.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="add_score" from="MalePlayer" to="." method="add_score"]
-[connection signal="position_update" from="MalePlayer" to="." method="_on_MalePlayer_position_update"]
-[connection signal="power_update" from="MalePlayer" to="." method="_on_MalePlayer_power_update"]
-[connection signal="remove_score" from="MalePlayer" to="." method="remove_score"]
 [connection signal="timeout" from="StageTextTimer" to="." method="_on_StageTextTimer_timeout"]

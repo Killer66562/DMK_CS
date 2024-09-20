@@ -8,6 +8,9 @@ signal end
 @export var Stages : Array[PackedScene] = []
 
 
+var player : Player = null
+
+
 #Timing
 @onready var days := 0
 @onready var hours := 0
@@ -41,7 +44,7 @@ func _update_score_text():
 
 
 func _update_player_power_text():
-	var player_power_text = "player power: %d" % [$MalePlayer.power]
+	var player_power_text = "player power: %d" % [player.power]
 	$PlayerPowerLabel.text = player_power_text
 
 
@@ -80,10 +83,22 @@ func load_next_stage():
 		emit_signal("end")
 
 
+func _check():
+	if player == null:
+		push_error("A player is required!")
+		get_tree().quit()
+
+
 func _ready():
+	_check()
+	
 	_update_timer_text()
 	_update_score_text()
 	_update_player_power_text()
+	
+	player.connect("add_score", Callable(self, "add_score"))
+	player.connect("remove_score", Callable(self, "remove_score"))
+	
 	load_next_stage()
 
 
@@ -107,13 +122,14 @@ func _on_Timer_timeout():
 	_update_timer_text()
 
 
-func _on_MalePlayer_position_update():
-	get_tree().call_group("mob", "update_player_position", $MalePlayer.position)
-	get_tree().call_group("dodge", "update_player_position", $MalePlayer.position)
+func _on_player_position_update():
+	get_tree().call_group("mob", "update_player_position", player.position)
+	get_tree().call_group("dodge", "update_player_position", player.position)
+
 
 func _on_StageTextTimer_timeout():
 	$StageLabel.hide()
 
 
-func _on_MalePlayer_power_update(power):
+func _on_player_power_update(power):
 	_update_player_power_text()
