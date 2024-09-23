@@ -1,10 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cebfquac6i212"]
+[gd_scene load_steps=5 format=3 uid="uid://cebfquac6i212"]
 
 [ext_resource type="Script" path="res://scripts/character_select_panel.gd" id="1_6gwq6"]
+[ext_resource type="PackedScene" uid="uid://taay25h8ei25" path="res://scenes/Game.tscn" id="2_5pbwm"]
+[ext_resource type="PackedScene" uid="uid://btmxrhabrn3od" path="res://scenes/player_infos/male_character_info.tscn" id="3_4gyk5"]
+[ext_resource type="PackedScene" uid="uid://b8ioq8aoq0kp8" path="res://scenes/player_infos/huh_info.tscn" id="4_sw4x4"]
 
-[node name="CharacterSelectPanel" type="Node2D"]
+[node name="CharacterSelectPanel" type="Node"]
 script = ExtResource("1_6gwq6")
+game = ExtResource("2_5pbwm")
+CharacterInfos = Array[PackedScene]([ExtResource("3_4gyk5"), ExtResource("4_sw4x4")])
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="TitleLabel" type="Label" parent="."]
+offset_left = 400.0
+offset_right = 800.0
+offset_bottom = 50.0
+text = "請選擇角色"
+horizontal_alignment = 1
+vertical_alignment = 1

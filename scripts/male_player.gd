@@ -23,6 +23,7 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 	$Health.value = health
 
+
 func _shoot_bullet() -> void:
 	for i in range(-power, power + 1):
 		var bullet: Bullet = BulletType.instantiate()

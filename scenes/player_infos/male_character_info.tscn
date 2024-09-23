@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://btmxrhabrn3od"]
+
+[ext_resource type="PackedScene" uid="uid://4jypfooo0poi" path="res://scenes/character_info.tscn" id="1_immj8"]
+[ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="2_neeq3"]
+[ext_resource type="PackedScene" uid="uid://do2da534503sw" path="res://scenes/players/MalePlayer.tscn" id="2_ouo45"]
+
+[node name="MaleCharacterInfo" instance=ExtResource("1_immj8")]
+CharacterScene = ExtResource("2_ouo45")
+
+[node name="CharacterNameLabel" parent="." index="0"]
+text = "測試角色1"
+
+[node name="CharacterIntroductionLabel" parent="." index="1"]
+text = "只是一隻測試角色"
+
+[node name="CharacterImage" parent="." index="2"]
+position = Vector2(500, 300)
+scale = Vector2(10, 10)
+texture = ExtResource("2_neeq3")

@@ -98,6 +98,9 @@ func _ready():
 	
 	player.connect("add_score", Callable(self, "add_score"))
 	player.connect("remove_score", Callable(self, "remove_score"))
+	player.connect("position_update", Callable(self, "player_position_update"))
+	
+	get_tree().root.call_deferred("add_child", player)
 	
 	load_next_stage()
 
@@ -122,7 +125,7 @@ func _on_Timer_timeout():
 	_update_timer_text()
 
 
-func _on_player_position_update():
+func player_position_update():
 	get_tree().call_group("mob", "update_player_position", player.position)
 	get_tree().call_group("dodge", "update_player_position", player.position)
 

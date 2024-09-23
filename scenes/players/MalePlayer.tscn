@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://do2da534503sw"]
 
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b041nn08tn08v" path="res://scenes/Player.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="2"]
 [ext_resource type="Script" path="res://scripts/male_player.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://yopa1tr6npo3" path="res://scenes/bullets/XBullet.tscn" id="4"]
@@ -39,11 +39,7 @@ animations = [{
 [node name="MalePlayer" instance=ExtResource("1")]
 script = ExtResource("3")
 BulletType = ExtResource("4")
-power = 5
-max_power = 3
-invinsible_sec = 5.0
 bullet_speed = 600
-bullet_velocity = Vector2(0, 0)
 speed = 200.0
 max_health = 10
 shoot_cooldown = 0.1
@@ -58,7 +54,6 @@ shape = SubResource("CapsuleShape2D_6kyrl")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 sprite_frames = SubResource("2")
-animation = &"invincible"
 
 [node name="ShootTimer" parent="." index="3"]
 wait_time = 0.1
