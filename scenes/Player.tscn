@@ -1,32 +1,41 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b041nn08tn08v"]
 
-[ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/player.gd" type="Script" id=2]
-[ext_resource path="res://assets/male_player.png" type="Texture2D" id=3]
+[ext_resource type="PackedScene" uid="uid://h08qmhn3s6hb" path="res://scenes/Character.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bf8t2h4gv6qp7" path="res://assets/male_player.png" id="3"]
 
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 3 ) ],
+[sub_resource type="SpriteFrames" id="1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
 "loop": true,
-"name": "default",
+"name": &"default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), null ],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3")
+}],
 "loop": true,
-"name": "invincible",
+"name": &"invincible",
 "speed": 5.0
-} ]
+}]
 
-[node name="Player" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="Player" instance=ExtResource("1")]
+script = ExtResource("2")
+BulletType = null
+max_power = 3
+invinsible_sec = 5.0
+bullet_speed = 0
+bullet_velocity = Vector2(0, 0)
 
-[node name="CollisionArea" parent="." index="0" groups=[
-"player_area",
-]]
+[node name="CollisionArea" parent="." index="0" groups=["player_area"]]
 
 [node name="AnimatedSprite2D" parent="." index="1"]
-frames = SubResource( 1 )
-animation = "invincible"
+sprite_frames = SubResource("1")
+animation = &"invincible"
 
 [node name="InvincibleTimer" type="Timer" parent="." index="3"]
 one_shot = true
@@ -40,4 +49,5 @@ one_shot = true
 [node name="FreezeTimer" type="Timer" parent="." index="6"]
 
 [node name="DissyTimer" type="Timer" parent="." index="7"]
+
 [connection signal="area_entered" from="CollisionArea" to="." method="_on_CollisionArea_area_entered"]

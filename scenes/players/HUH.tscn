@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnalgrxgt226k"]
 
-[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="1_wfrop"]
+[ext_resource type="PackedScene" uid="uid://b041nn08tn08v" path="res://scenes/Player.tscn" id="1_wfrop"]
 [ext_resource type="Script" path="res://scripts/huh.gd" id="2_bb1bl"]
 [ext_resource type="PackedScene" uid="uid://na4tac37xl8f" path="res://scenes/bullets/big_green_bullet.tscn" id="3_jquk7"]
 [ext_resource type="Texture2D" uid="uid://covwc51mjurh0" path="res://assets/huh.png" id="4_vlmni"]
@@ -30,7 +30,6 @@ animations = [{
 [node name="HUH" instance=ExtResource("1_wfrop")]
 script = ExtResource("2_bb1bl")
 BulletType = ExtResource("3_jquk7")
-power = 0
 max_power = 10
 invinsible_sec = 3.0
 bullet_speed = 150
